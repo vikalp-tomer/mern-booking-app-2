@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 import userRoutes from "./routes/users";
+import authRoutes from "./routes/auth";
 
 import mongoose from "mongoose";
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 app.listen(7000, () => {
