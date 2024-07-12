@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
+import userRoutes from "./routes/users";
 
 import mongoose from "mongoose";
 
@@ -20,9 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.get("/api/test", async (req: Request, res: Response) => {
-  res.json({ message: "Hello from express endpoint!" });
-});
+app.use("/api/users", userRoutes);
 
 app.listen(7000, () => {
   console.log(`Server started on port ${7000}`);
