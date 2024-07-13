@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth";
 
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 mongoose
   .connect(process.env.MONGO_CONNECTION_STRING as string)
@@ -28,6 +29,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);

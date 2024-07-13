@@ -32,6 +32,7 @@ const App = () => {
             </Layout>
           }
         />
+        <Route path="*" element={<Layout>Page not found</Layout>} />
       </Routes>
     </Router>
   );
