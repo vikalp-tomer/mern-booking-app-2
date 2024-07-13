@@ -36,7 +36,7 @@ router.post(
         return res.status(400).json({ message: "Invalid credentials" });
       }
 
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET as string, {
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY as string, {
         expiresIn: "1d",
       });
 
@@ -56,6 +56,13 @@ router.post(
 
 router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
   res.status(200).send({ userId: req.userId });
+});
+
+router.post("/logout", (req: Request, res: Response) => {
+  res.cookie("auth_token", "", {
+    expires: new Date(0),
+  });
+  res.status(200).send({ message: "Logged out successfully" });
 });
 
 export default router;
